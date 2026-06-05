@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আল-হেরা সোশ্যাল সার্ভিস | Al-Hera Social Service</title>
+    <!-- Google Fonts: Hind Siliguri for Bengali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#064e3b', /* Deep Green */
+                            lightgreen: '#10b981',
+                            gold: '#d97706', /* Gold Accent */
+                            lightgold: '#f59e0b',
+                            darkBg: '#0b1511',
+                            darkCard: '#12221b'
+                        }
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        /* Custom Glassmorphism styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .dark .glass-card {
+            background: rgba(18, 34, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Smooth scale animation on scroll items */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Floating animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-brand-darkBg dark:text-gray-100 transition-colors duration-300 antialiased font-bengali">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 w-full glass-card border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-amber-400">
+                        আল-হেরা
+                    </span>
+                    <span class="text-xs sm:text-sm font-semibold text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-700 px-2 py-0.5 rounded-full">
+                        সোশ্যাল সার্ভিস
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8 text-base font-semibold">
+                    <a href="#home" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">হোম</a>
+                    <a href="#services" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">আমাদের সেবা</a>
+                    <a href="#youtube-packages" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">ইউটিউব প্যাকেজ</a>
+                    <a href="#facebook-packages" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">ফেসবুক প্যাকেজ</a>
+                    <a href="#payment-methods" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">পেমেন্ট মাধ্যম</a>
+                    <a href="#contact" class="text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-amber-400 transition">যোগাযোগ</a>
+                </nav>
+
+                <!-- Actions / Dark Mode -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="p-2.5 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800 transition focus:outline-none" aria-label="Toggle Dark Mode">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon text-lg"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun text-lg hidden"></i>
+                    </button>
+                    
+                    <a href="https://wa.me/8801309852607" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-full shadow-lg hover:shadow-emerald-500/20 transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>অর্ডার করুন</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-slate-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 focus:outline-none">
+                        <i class="fas fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gray-200 dark:border-gray-800 py-3 px-4 space-y-2">
+            <a href="#home" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">হোম</a>
+            <a href="#services" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">আমাদের সেবা</a>
+            <a href="#youtube-packages" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">ইউটিউব প্যাকেজ</a>
+            <a href="#facebook-packages" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">ফেসবুক প্যাকেজ</a>
+            <a href="#payment-methods" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">পেমেন্ট মাধ্যম</a>
+            <a href="#contact" class="block py-2 px-3 rounded hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-gray-200 font-semibold">যোগাযোগ</a>
+            <a href="https://wa.me/8801309852607" target="_blank" class="flex items-center justify-center gap-2 w-full bg-emerald-600 text-white py-2.5 rounded-lg font-bold shadow-md">
+                <i class="fab fa-whatsapp"></i>
+                <span>হোয়াটসঅ্যাপ অর্ডার</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-32 dark:bg-gradient-to-b dark:from-brand-darkBg dark:to-[#081812]">
+        <!-- Background accents -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        ১০০% বিশ্বস্ত ও দ্রুত সার্ভিস
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-slate-950 dark:text-white mb-6">
+                        <span class="text-emerald-600 dark:text-emerald-400">আল-হেরা</span> সোশ্যাল সার্ভিস
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        বাংলাদেশের অন্যতম বিশ্বস্ত YouTube ও Facebook গ্রোথ সার্ভিস প্রদানকারী প্রতিষ্ঠান। আপনার অনলাইন উপস্থিতি বাড়াতে আমরা আছি আপনার পাশে।
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://wa.me/8801309852607" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/30 transition transform hover:-translate-y-0.5 text-lg">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            WhatsApp এ অর্ডার করুন
+                        </a>
+                        <a href="https://www.facebook.com/YTZihad13" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-bold px-8 py-4 rounded-xl shadow-sm transition transform hover:-translate-y-0.5 text-lg border border-gray-300 dark:border-gray-700">
+                            <i class="fab fa-facebook text-xl text-blue-600"></i>
+                            ফেসবুক পেজ দেখুন
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Feature Card (আপডেট করা হয়েছে) -->
+                <div class="lg:col-span-5 flex justify-center w-full">
+                    <div class="relative w-full max-w-md sm:max-w-lg lg:max-w-xl p-8 sm:p-10 rounded-3xl glass-card shadow-2xl border border-white/40 dark:border-emerald-950/40 floating-icon transition-all duration-300">
+                        <div class="absolute -top-6 -right-6 w-16 h-16 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg transform rotate-12">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 text-center sm:text-left">
+                            <img src="  zahid.png" alt="Zahid Hasan Profile" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-amber-500 object-cover bg-white p-1 shadow-md">
+                            <div class="mt-2 sm:mt-4">
+                                <h3 class="font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">জাহিদ হাসান</h3>
+                                <p class="text-base sm:text-lg text-amber-600 dark:text-amber-400 font-bold mt-1">Social Media Specialist</p>
+                                <p class="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">& Digital Marketer</p>
+                            </div>
+                        </div>
+                        <p class="text-base text-slate-600 dark:text-gray-300 mb-6 italic leading-relaxed">
+                            "আমি আপনার ইউটিউব এবং ফেসবুক প্রোফাইল গ্রোথ করার দীর্ঘস্থায়ী সমাধান প্রদান করছি।"
+                        </p>
+                        <div class="space-y-3.5 border-t border-slate-200 dark:border-slate-800 pt-5">
+                            <div class="flex items-center gap-3.5 text-base text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check-circle text-emerald-500 text-xl"></i>
+                                <span class="font-semibold">লাইফটাইম নন-ড্রপ গ্যারান্টি</span>
+                            </div>
+                            <div class="flex items-center gap-3.5 text-base text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check-circle text-emerald-500 text-xl"></i>
+                                <span class="font-semibold">সার্বক্ষণিক গ্রাহক সেবা</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Counter (Stats Section) -->
+    <section class="py-12 bg-emerald-900 text-white relative z-10 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center" id="counters-box">
+                <div>
+                    <div class="text-3xl sm:text-5xl font-extrabold text-amber-400 mb-2 font-mono" data-target="2500">০</div>
+                    <div class="text-sm sm:text-base text-emerald-100 font-medium">সন্তুষ্ট গ্রাহক</div>
+                </div>
+                <div>
+                    <div class="text-3xl sm:text-5xl font-extrabold text-amber-400 mb-2 font-mono" data-target="3800">০</div>
+                    <div class="text-sm sm:text-base text-emerald-100 font-medium">সম্পন্নকৃত অর্ডার</div>
+                </div>
+                <div>
+                    <div class="text-3xl sm:text-5xl font-extrabold text-amber-400 mb-2 font-mono" data-target="100">০</div>
+                    <div class="text-sm sm:text-base text-emerald-100 font-medium">শতকরা গ্যারান্টি</div>
+                </div>
+                <div>
+                    <div class="text-3xl sm:text-5xl font-extrabold text-amber-400 mb-2 font-mono" data-target="5">০</div>
+                    <div class="text-sm sm:text-base text-emerald-100 font-medium">বছরের অভিজ্ঞতা</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="services" class="reveal py-20 bg-slate-50 dark:bg-brand-darkBg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white mb-4 relative inline-block">
+                    আমি কে?
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-500/5 rounded-full blur-2xl"></div>
+                <div class="relative z-10">
+                    <p class="text-lg sm:text-xl text-slate-700 dark:text-gray-200 leading-relaxed mb-6">
+                        আমি <strong class="text-emerald-600 dark:text-emerald-400 font-bold">জাহিদ হাসান</strong>। একজন ইউটিউব ও সোশ্যাল মিডিয়া স্পেশালিস্ট এবং ডিজিটাল মার্কেটার। আমি মূলত বাংলাদেশি অডিয়েন্স ভিত্তিক YouTube Subscriber, Watch Time, Views, Search Service এবং Facebook Follower Growth Service সততা ও বিশ্বস্ততার সাথে প্রদান করে থাকি। 
+                    </p>
+                    <p class="text-slate-600 dark:text-gray-400">
+                        আমাদের সমস্ত সার্ভিসগুলো অর্গানিক উপায়ে এবং সম্পূর্ণ নিরাপদে করা হয়, যা আপনার চ্যানেলের মনিটাইজেশন সহজ করতে সবচেয়ে বেশি সাহায্য করে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Highlights -->
+    <section class="reveal py-16 bg-white dark:bg-brand-darkBg/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl glass-card border border-slate-100 dark:border-slate-800 flex items-start gap-4 transition hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center flex-shrink-0 text-emerald-600 dark:text-emerald-400 text-xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2">অতি দ্রুত ডেলিভারি</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400">অর্ডার সাবমিট হওয়ার দ্রুততম সময়ের মধ্যে সার্ভিস ডেলিভারি দেওয়া শুরু হয়।</p>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl glass-card border border-slate-100 dark:border-slate-800 flex items-start gap-4 transition hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/50 flex items-center justify-center flex-shrink-0 text-amber-600 dark:text-amber-400 text-xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2">১০০% সুরক্ষিত সেবা</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400">কোনোরকম পাসওয়ার্ড ছাড়াই শতভাগ সেফ পলিসিতে কাজ সম্পন্ন করা হয়।</p>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl glass-card border border-slate-100 dark:border-slate-800 flex items-start gap-4 transition hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center flex-shrink-0 text-emerald-600 dark:text-emerald-400 text-xl">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2">লাইফটাইম গ্যারান্টি</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400">আমাদের বেশিরভাগ প্যাকেজে রয়েছে রিয়েল লাইফটাইম নন-ড্রপ গ্যারান্টি রিফিল সুবিধা।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Package Section -->
+    <section id="youtube-packages" class="reveal py-20 bg-slate-50 dark:bg-brand-darkBg/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold text-lg uppercase tracking-wider block mb-2">অফার ও প্যাকেজ সমূহ</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    ইউটিউব গ্রোথ প্যাকেজ
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+                <p class="text-slate-600 dark:text-gray-400 mt-4">আপনার চ্যানেলকে অতি দ্রুত প্রফেশনাল লেভেলে নিয়ে যেতে এখনই সঠিক প্যাকেজটি বেছে নিন।</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <!-- YouTube Package 3 -->
+                <div class="rounded-3xl glass-card border border-slate-200 dark:border-slate-800 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:border-emerald-500/20 relative group">
+                    <div>
+                        <span class="absolute top-4 right-4 bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                            Real Lifetime Guarantee
+                        </span>
+                        <div class="mb-6 mt-2">
+                            <span class="text-slate-500 dark:text-gray-400 text-sm font-semibold uppercase tracking-wider block">Starter Pack</span>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">🏆 স্টার্টার প্যাকেজ</h3>
+                        </div>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-extrabold text-slate-900 dark:text-white font-mono">১৯৫</span>
+                            <span class="text-lg text-slate-500 dark:text-gray-400 font-bold ml-1">টাকা</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>100 Subscriber</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>200 Minute Watchtime</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>100 Views</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>100 Search</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>100 Like + Comment</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/8801309852607?text=আসসালামু আলাইকুম, আমি আল-হেরা সোশ্যাল সার্ভিসের ইউটিউব 'স্টার্টার প্যাকেজটি' নিতে চাই।" target="_blank" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-emerald-700 dark:bg-slate-800 dark:hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        WhatsApp এ অর্ডার করুন
+                    </a>
+                </div>
+
+                <!-- YouTube Package 2 -->
+                <div class="rounded-3xl glass-card border border-slate-200 dark:border-slate-800 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:border-emerald-500/20 relative group">
+                    <div>
+                        <span class="absolute top-4 right-4 bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                            Real Lifetime Guarantee
+                        </span>
+                        <div class="mb-6 mt-2">
+                            <span class="text-slate-500 dark:text-gray-400 text-sm font-semibold uppercase tracking-wider block">Standard Pack</span>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">🏆 স্ট্যান্ডার্ড প্যাকেজ</h3>
+                        </div>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-extrabold text-slate-900 dark:text-white font-mono">৯৮০</span>
+                            <span class="text-lg text-slate-500 dark:text-gray-400 font-bold ml-1">টাকা</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>500 Subscriber</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>1000 Minute Watchtime</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>600 Views</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>500 Search</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950 p-1 rounded-full text-xs"></i>
+                                <span>500 Like + Comment</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-emerald-600 dark:text-emerald-400 font-bold">
+                                <i class="fas fa-gift text-amber-500"></i>
+                                <span>20 Sub Gift</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/8801309852607?text=আসসালামু আলাইকুম, আমি আল-হেরা সোশ্যাল সার্ভিসের ইউটিউব 'স্ট্যান্ডার্ড প্যাকেজটি' নিতে চাই।" target="_blank" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-emerald-700 dark:bg-slate-800 dark:hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        WhatsApp এ অর্ডার করুন
+                    </a>
+                </div>
+
+                <!-- YouTube Package 1 (Premium - Featured) -->
+                <div class="rounded-3xl glass-card border-2 border-amber-500 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl relative shadow-xl transform md:-translate-y-4">
+                    <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-amber-500 text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                        Best Seller ⭐
+                    </span>
+                    <div>
+                        <div class="flex justify-between items-start mb-6 mt-4">
+                            <div>
+                                <span class="text-amber-600 dark:text-amber-400 text-sm font-semibold uppercase tracking-wider block">Premium Pack</span>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">🏆 প্রিমিয়াম প্যাকেজ</h3>
+                            </div>
+                            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                                Real Lifetime Guarantee
+                            </span>
+                        </div>
+                        <div class="flex items-baseline mb-6 text-amber-500">
+                            <span class="text-5xl font-black font-mono">১৯৫০</span>
+                            <span class="text-lg font-bold ml-1 text-slate-500 dark:text-gray-400">টাকা</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100 font-semibold">
+                                <i class="fas fa-check text-amber-500 bg-amber-100 dark:bg-amber-950/40 p-1 rounded-full text-xs"></i>
+                                <span>1000 Subscriber</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100">
+                                <i class="fas fa-check text-amber-500 bg-amber-100 dark:bg-amber-950/40 p-1 rounded-full text-xs"></i>
+                                <span>2000 Minute Watchtime</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100">
+                                <i class="fas fa-check text-amber-500 bg-amber-100 dark:bg-amber-950/40 p-1 rounded-full text-xs"></i>
+                                <span>1200 Views</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100">
+                                <i class="fas fa-check text-amber-500 bg-amber-100 dark:bg-amber-950/40 p-1 rounded-full text-xs"></i>
+                                <span>1000 Search</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100">
+                                <i class="fas fa-check text-amber-500 bg-amber-100 dark:bg-amber-950/40 p-1 rounded-full text-xs"></i>
+                                <span>1000 Like + Comment</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-amber-500 font-extrabold">
+                                <i class="fas fa-gift text-lg"></i>
+                                <span>50 Sub Gift</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/8801309852607?text=আসসালামু আলাইকুম, আমি আল-হেরা সোশ্যাল সার্ভিসের ইউটিউব 'প্রিমিয়াম প্যাকেজটি' নিতে চাই।" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-amber-500 hover:from-emerald-700 hover:to-amber-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        WhatsApp এ অর্ডার করুন
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facebook Package Section -->
+    <section id="facebook-packages" class="reveal py-20 bg-white dark:bg-brand-darkBg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-blue-600 dark:text-blue-400 font-bold text-lg uppercase tracking-wider block mb-2">ফেসবুক প্রোমোশন</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    ফেসবুক গ্রোথ প্যাকেজ
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+                <p class="text-slate-600 dark:text-gray-400 mt-4">ফেসবুক আইডি বা পেজে ইনস্ট্যান্ট ফলোয়ার ও রিচ বাড়াতে সেরা সেবাগুলো বেছে নিন।</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- FB Package 1 -->
+                <div class="rounded-3xl glass-card border border-slate-200 dark:border-slate-800 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:border-emerald-500/20 relative group">
+                    <div>
+                        <span class="absolute top-4 right-4 bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                            Real Lifetime Guarantee
+                        </span>
+                        <div class="mb-6 mt-2">
+                            <span class="text-blue-600 dark:text-blue-400 text-sm font-semibold uppercase tracking-wider block">Standard Follower Package</span>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">👥 ১,০০০ ফলোয়ার প্যাকেজ</h3>
+                        </div>
+                        <div class="flex items-baseline mb-6 text-emerald-600 dark:text-emerald-400">
+                            <span class="text-4xl font-extrabold font-mono">৩০০</span>
+                            <span class="text-lg text-slate-500 dark:text-gray-400 font-bold ml-1">টাকা</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-blue-500 bg-blue-100 dark:bg-blue-950 p-1 rounded-full text-xs"></i>
+                                <span>1000 Facebook Follower</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-200">
+                                <i class="fas fa-check text-blue-500 bg-blue-100 dark:bg-blue-950 p-1 rounded-full text-xs"></i>
+                                <span>1000 Search</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/8801309852607?text=আসসালামু আলাইকুম, আমি আল-হেরা সোশ্যাল সার্ভিসের ফেসবুক '১,০০০ ফলোয়ার প্যাকেজটি' নিতে চাই।" target="_blank" class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-emerald-700 dark:bg-slate-800 dark:hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        WhatsApp এ অর্ডার করুন
+                    </a>
+                </div>
+
+                <!-- FB Package 2 -->
+                <div class="rounded-3xl glass-card border-2 border-emerald-500 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl relative">
+                    <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-emerald-500 text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                        Super Value ⚡
+                    </span>
+                    <div>
+                        <div class="flex justify-between items-start mb-6 mt-4">
+                            <div>
+                                <span class="text-emerald-600 dark:text-emerald-400 text-sm font-semibold uppercase tracking-wider block">Bulk Follower Package</span>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">👥 ৫,০০০ ফলোয়ার প্যাকেজ</h3>
+                            </div>
+                            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                                Real Lifetime Guarantee
+                            </span>
+                        </div>
+                        <div class="flex items-baseline mb-6 text-amber-500">
+                            <span class="text-4xl font-extrabold font-mono">১৩৫০</span>
+                            <span class="text-lg font-bold ml-1 text-slate-500 dark:text-gray-400">টাকা</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100 font-semibold">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950/40 p-1 rounded-full text-xs"></i>
+                                <span>5000 Facebook Follower</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-700 dark:text-gray-100">
+                                <i class="fas fa-check text-emerald-500 bg-emerald-100 dark:bg-emerald-950/40 p-1 rounded-full text-xs"></i>
+                                <span>5000 Search</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/8801309852607?text=আসসালামু আলাইকুম, আমি আল-হেরা সোশ্যাল সার্ভিসের ফেসবুক '৫,০০০ ফলোয়ার প্যাকেজটি' নিতে চাই।" target="_blank" class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-300">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        WhatsApp এ অর্ডার করুন
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Method Section -->
+    <section id="payment-methods" class="reveal py-20 bg-slate-50 dark:bg-brand-darkBg/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold text-lg uppercase tracking-wider block mb-2">লেনদেন প্রক্রিয়া</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    পেমেন্ট করার মাধ্যমসমূহ
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+                <p class="text-slate-600 dark:text-gray-400 mt-4">আমাদের নিম্নলিখিত অফিশিয়াল মোবাইল ব্যাংকিং বা ব্যাংক একাউন্টে নিরাপদে অর্থ পাঠাতে পারবেন।</p>
+            </div>
+
+            <!-- Showcase Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                
+                <!-- bKash Card -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden group hover:border-pink-500/30 transition-all duration-300">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-[#e2136e] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-16 h-16 mx-auto mb-4 bg-pink-100 dark:bg-pink-950/40 rounded-full flex items-center justify-center">
+                        <i class="fas fa-wallet text-2xl text-[#e2136e]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-950 dark:text-white">বিকাশ পার্সোনাল</h3>
+                    <p class="text-[#e2136e] font-bold mt-2 font-mono">01309-852607</p>
+                    <span class="text-xs text-slate-500 dark:text-gray-400 block mt-1">bKash Personal</span>
+                </div>
+
+                <!-- Nagad Card -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden group hover:border-orange-500/30 transition-all duration-300">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-[#f7941d] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-16 h-16 mx-auto mb-4 bg-orange-100 dark:bg-orange-950/40 rounded-full flex items-center justify-center">
+                        <i class="fas fa-wallet text-2xl text-[#f7941d]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-950 dark:text-white">নগদ পার্সোনাল</h3>
+                    <p class="text-[#f7941d] font-bold mt-2 font-mono">01309-852607</p>
+                    <span class="text-xs text-slate-500 dark:text-gray-400 block mt-1">Nagad Personal</span>
+                </div>
+
+                <!-- Rocket Card -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden group hover:border-purple-500/30 transition-all duration-300">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-[#8c2d19] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-100 dark:bg-purple-950/40 rounded-full flex items-center justify-center">
+                        <i class="fas fa-wallet text-2xl text-[#8c2d19]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-950 dark:text-white">রকেট পার্সোনাল</h3>
+                    <p class="text-[#8c2d19] font-bold mt-2 font-mono">01309-852607</p>
+                    <span class="text-xs text-slate-500 dark:text-gray-400 block mt-1">Rocket Personal</span>
+                </div>
+
+                <!-- DBBL Card -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden group hover:border-blue-500/30 transition-all duration-300">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-[#005fa9] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 dark:bg-blue-950/40 rounded-full flex items-center justify-center">
+                        <i class="fas fa-university text-2xl text-[#005fa9]"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-950 dark:text-white">DBBL অ্যাকাউন্ট</h3>
+                    <p class="text-[#005fa9] font-bold mt-2 text-sm">যোগাযোগ করুন</p>
+                    <span class="text-xs text-slate-500 dark:text-gray-400 block mt-1">Dutch-Bangla Bank</span>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-sm text-slate-500 dark:text-gray-400 mt-8">
+                * টাকা পাঠানোর পূর্বে অবশ্যই আমাদের সাথে যোগাযোগ করে শিওর হয়ে নিবেন।
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="reveal py-20 bg-white dark:bg-brand-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold text-lg uppercase tracking-wider block mb-2">গ্রাহকের প্রতিক্রিয়া</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    আমাদের রিভিউসমূহ
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <p class="text-slate-600 dark:text-gray-300 mb-6 italic">
+                        "আমি ইউটিউব প্রিমিয়াম প্যাকেজটি নিয়েছিলাম। তারা ২ দিনের মধ্যে সব সাবস্ক্রাইবার ও ওয়াচটাইম ডেলিভারি দিয়েছে। কোনো ড্রপ হয়নি। খুবই বিশ্বস্ত সার্ভিস!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold">
+                            ই
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-950 dark:text-white text-sm">ইমতিয়াজ আহমেদ</h4>
+                            <div class="text-amber-500 text-xs">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <p class="text-slate-600 dark:text-gray-300 mb-6 italic">
+                        "৫,০০০ ফেসবুক ফলোয়ার সার্ভিসটি নেওয়ার পর খুবই দ্রুত প্রমোশন দেখতে পেয়েছি। সার্ভিস কোয়ালিটি সত্যিই অসাধারণ এবং উনাদের সাপোর্টও আন্তরিক।"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold">
+                            স
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-950 dark:text-white text-sm">সাদিয়া রহমান</h4>
+                            <div class="text-amber-500 text-xs">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <p class="text-slate-600 dark:text-gray-300 mb-6 italic">
+                        "জাহিদ ভাইয়ের কাজ ও কথা সম্পূর্ণ মিল রয়েছে। স্টার্টার প্যাক নিয়ে ট্রায়াল করেছি, এখন প্রিমিয়াম প্যাক অর্ডার করলাম। শতভাগ রিকমেন্ডেড!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold">
+                            ম
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-950 dark:text-white text-sm">মাহমুদুল হাসান</h4>
+                            <div class="text-amber-500 text-xs">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="reveal py-20 bg-slate-50 dark:bg-brand-darkBg/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold text-lg uppercase tracking-wider block mb-2">জিজ্ঞাসিত প্রশ্নসমূহ</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    সাধারণ জিজ্ঞাসা (FAQ)
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="glass-card rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between font-bold text-slate-900 dark:text-white">
+                        <span>১. এই সাবস্ক্রাইবার বা ফলোয়ারগুলো কি পরবর্তীতে ড্রপ বা কমে যাবে?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 dark:text-gray-300 text-sm sm:text-base border-t border-slate-100 dark:border-slate-900 pt-3">
+                        না, আমাদের সবগুলো প্যাকেজের সার্ভিসেই আমরা রিয়েল লাইফটাইম নন-ড্রপ গ্যারান্টি প্রদান করি। কোনো কারণে সামান্য কমলে আমরা ফ্রিতে রিফিল করে দেব।
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-card rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between font-bold text-slate-900 dark:text-white">
+                        <span>২. কাজের জন্য কি আমার চ্যানেলের জিমেইল বা পাসওয়ার্ড লাগবে?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 dark:text-gray-300 text-sm sm:text-base border-t border-slate-100 dark:border-slate-900 pt-3">
+                        না, কোনোভাবেই পাসওয়ার্ড লাগবে না। কাজের জন্য শুধু আপনার চ্যানেল লিংক অথবা পোস্ট লিংক দিলেই কাজ শুরু করা যাবে।
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-card rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between font-bold text-slate-900 dark:text-white">
+                        <span>৩. পেমেন্ট করার কতক্ষণ পর কাজ শুরু হবে?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 dark:text-gray-300 text-sm sm:text-base border-t border-slate-100 dark:border-slate-900 pt-3">
+                        পেমেন্ট কনফার্ম হওয়ার পরবর্তী ১ থেকে ৩ ঘণ্টার মধ্যে কাজ প্রসেসিং শুরু হয় এবং অর্ডারের আকার অনুযায়ী নির্দিষ্ট সময়ে সম্পন্ন হয়।
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="reveal py-20 bg-white dark:bg-brand-darkBg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold text-lg uppercase tracking-wider block mb-2">যোগাযোগ করুন</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white relative inline-block">
+                    আমাদের সাথে যোগাযোগ করুন
+                    <span class="absolute left-1/2 bottom-[-10px] w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 rounded transform -translate-x-1/2"></span>
+                </h2>
+                <p class="text-slate-600 dark:text-gray-400 mt-4">যেকোনো প্রশ্ন অথবা কাস্টম অফার নিতে সরাসরি যোগাযোগ করুন আমাদের সাথে।</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch max-w-5xl mx-auto">
+                <!-- Info Cards -->
+                <div class="space-y-6 flex flex-col justify-between">
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 dark:text-gray-400 block font-semibold uppercase">WhatsApp</span>
+                            <a href="https://wa.me/8801309852607" target="_blank" class="font-bold text-lg text-slate-950 dark:text-white hover:text-emerald-600 transition font-mono">01309-852607</a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/50 flex items-center justify-center text-amber-600 dark:text-amber-400 text-2xl">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 dark:text-gray-400 block font-semibold uppercase">Email Address</span>
+                            <a href="mailto:zahidhasan766@gmail.com" class="font-bold text-lg text-slate-950 dark:text-white hover:text-amber-500 transition font-mono break-all">zahidhasan766@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 dark:text-gray-400 block font-semibold uppercase">Address</span>
+                            <span class="font-bold text-lg text-slate-950 dark:text-white">Colony, Bogura, Rajshahi, Bangladesh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action Box -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col justify-center text-center">
+                    <h3 class="text-2xl font-bold text-slate-950 dark:text-white mb-4">একটি বার্তা দিন</h3>
+                    <p class="text-slate-600 dark:text-gray-300 mb-8">
+                        সরাসরি আমাদের হোয়াটসঅ্যাপ ইনবক্সে কথা বলতে নিচের বাটনে ক্লিক করুন। আমরা আপনাকে দ্রুত রিপ্লাই দেওয়ার জন্য প্রস্তুত আছি।
+                    </p>
+                    <a href="https://wa.me/8801309852607" target="_blank" class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition text-lg mb-4">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        WhatsApp ইনবক্সে অর্ডার করুন
+                    </a>
+                    
+                    <div class="flex justify-center gap-4 mt-4">
+                        <a href="https://www.facebook.com/profile.php?id=61570060253987" target="_blank" class="w-10 h-10 bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100070826320588" target="_blank" class="w-10 h-10 bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.facebook.com/YTZihad13" target="_blank" class="w-10 h-10 bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 rounded-full flex items-center justify-center transition">
+                            <i class="fas fa-bullhorn"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-gray-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="text-2xl font-bold text-white tracking-tight">
+                        আল-হেরা <span class="text-emerald-500 text-sm font-semibold">সোশ্যাল সার্ভিস</span>
+                    </span>
+                    <p class="text-sm mt-2">বাংলাদেশের অন্যতম বিশ্বস্ত সোশ্যাল মিডিয়া ও ইউটিউব গ্রোথ প্ল্যাটফর্ম।</p>
+                </div>
+                <div class="flex gap-6 text-sm">
+                    <a href="#home" class="hover:text-white transition">হোম</a>
+                    <a href="#services" class="hover:text-white transition">সেবা</a>
+                    <a href="#youtube-packages" class="hover:text-white transition">ইউটিউব প্যাকেজ</a>
+                    <a href="#facebook-packages" class="hover:text-white transition">ফেসবুক প্যাকেজ</a>
+                </div>
+            </div>
+            <hr class="border-slate-800 my-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <p>&copy; 2026 Al-Hera Social Service. All rights reserved.</p>
+                <p class="flex items-center gap-1">Developed with <i class="fas fa-heart text-red-500"></i> Modern Web Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button id="back-to-top" class="hidden fixed bottom-24 right-6 z-40 w-12 h-12 bg-amber-500 hover:bg-amber-600 text-white rounded-full flex items-center justify-center shadow-lg transition duration-300">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/8801309852607" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full flex items-center justify-center shadow-2xl transition duration-300 hover:scale-110">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- JavaScript For Interactivity -->
+    <script>
+        // Theme Toggle (Dark / Light Mode)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+            themeToggleDarkIcon.classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleLightIcon.classList.add('hidden');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fas fa-bars text-xl';
+            } else {
+                menuIcon.className = 'fas fa-times text-xl';
+            }
+        });
+
+        // Hide mobile menu on anchor click
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fas fa-bars text-xl';
+            });
+        });
+
+        // FAQ Toggle Accordion
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.fa-chevron-down');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+
+        // Counter Animation
+        const countersBox = document.getElementById('counters-box');
+        const counters = document.querySelectorAll('#counters-box [data-target]');
+        
+        const countNumbers = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => {
+                        const updateCount = () => {
+                            const target = +counter.getAttribute('data-target');
+                            const current = +counter.innerText;
+                            const increment = Math.ceil(target / 40); // speed controlling step
+
+                            if (current < target) {
+                                counter.innerText = current + increment > target ? target : current + increment;
+                                setTimeout(updateCount, 40);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if(countersBox) {
+            countNumbers.observe(countersBox);
+        }
+
+        // Back To Top Button logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
